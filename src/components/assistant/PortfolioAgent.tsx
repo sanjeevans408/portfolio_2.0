@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Bot, Loader2, MessageSquarePlus, Send, Sparkles, X } from "lucide-react";
+import { apiUrl } from "../../lib/api";
 
 type ChatMessage = {
   role: "user" | "assistant";
@@ -47,7 +48,7 @@ export default function PortfolioAgent() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/assistant/chat", {
+      const response = await fetch(apiUrl("/api/assistant/chat"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

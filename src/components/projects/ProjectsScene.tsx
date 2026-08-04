@@ -27,6 +27,7 @@ import { Canvas, useFrame, useThree }     from "@react-three/fiber";
 import { Stars }                          from "@react-three/drei";
 import * as THREE                         from "three";
 import { projects as fallbackProjects, type Project } from "../../data/projects";
+import { apiUrl } from "../../lib/api";
 import ProjectCard3D, { CARD_ACCENTS }    from "./ProjectCard3D";
 
 /* ═══════════════════════════════════════════════════════════════
@@ -258,7 +259,7 @@ export default function ProjectsScene() {
   useEffect(() => {
     async function loadProjects() {
       try {
-        const response = await fetch("/api/projects");
+        const response = await fetch(apiUrl("/api/projects"));
         const body = await response.text();
         const data = body ? JSON.parse(body) : null;
 

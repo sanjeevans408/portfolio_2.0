@@ -26,6 +26,10 @@ Or use two terminals: run `npm run dev` in one and `npm run dev:server` in the o
 
 MongoDB is optional for the portfolio agent. Without it, locally bundled project cards remain visible, but the projects and contact API endpoints cannot store or retrieve database data.
 
+## Deploy on Render
+
+Use the included `render.yaml` Blueprint to create two services: the static portfolio frontend and the Node API. In the API service, set `NVIDIA_API_KEY` and (optionally) `MONGODB_URI`. After the API deploys, copy its public URL and set the frontend's `VITE_API_BASE_URL` to that URL, then redeploy the frontend.
+
 ## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
