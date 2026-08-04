@@ -1,0 +1,60 @@
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+  live: string;
+  github: string;
+  features?: string[];
+}
+
+export const projects: Project[] = [
+  {
+    id: 1,
+    title: "Web Scrapper",
+    description: "Modern web scraping application with advanced data extraction capabilities.",
+    image: "/images/projects/webscrapper.png",
+    tech: ["React", "Node.js", "JavaScript", "Puppeteer"],
+    live: "https://sanjeevans408.github.io/webscrapper/",
+    github: "https://github.com/sanjeevans408/webscrapper",
+    features: ["Modern UI", "Fast scraping", "Data export", "Responsive design"],
+  },
+  {
+    id: 2,
+    title: "AI Chatbot",
+    description: "AI-powered conversational chatbot using modern web technologies and OpenAI integration.",
+    image: "/images/projects/chatbot.png",
+    tech: ["React", "Node.js", "OpenAI", "Express"],
+    live: "https://chat-bot-2hxs.onrender.com/",
+    github: "https://github.com/sanjeevans408/ai-chatbot",
+    features: ["AI assistant", "Real conversations", "Responsive UI", "Clean interface"],
+  },
+  {
+    id: 3,
+    title: "Realtime Chat",
+    description: "Realtime chat application with Socket.IO for instant messaging and notifications.",
+    image: "/images/projects/realchat.png",
+    tech: ["React", "Socket.io", "Node.js", "MongoDB"],
+    live: "https://realchat-8pip.onrender.com/",
+    github: "https://github.com/sanjeevans408/realtime-chat",
+    features: ["Socket.IO", "Authentication", "Real-time messaging", "Notifications"],
+  },
+  {
+    id: 4,
+    title: "Gym Management System",
+    description: "Complete gym website with membership management and admin dashboard.",
+    image: "/images/projects/gym.png",
+    tech: ["React", "Node.js", "MongoDB", "Stripe"],
+    live: "https://gym-app-0t57.onrender.com/",
+    github: "https://github.com/sanjeevans408/gym-management",
+    features: ["Membership system", "Dashboard", "Authentication", "Payment integration"],
+  },
+];
+
+export const futureProjects = [
+  "DocuMind AI - AI-powered document processing",
+  "StatBot - Real-time statistics dashboard",
+  "Smart Campus - Campus management platform",
+  "AI Portfolio Builder - Automated portfolio generator",
+];

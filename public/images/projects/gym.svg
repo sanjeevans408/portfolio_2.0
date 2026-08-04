@@ -1,0 +1,14 @@
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#071219"/>
+      <stop offset="100%" stop-color="#112a3e"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg4)" />
+  <rect x="100" y="130" width="1000" height="520" rx="40" ry="40" fill="rgba(255,255,255,0.06)" stroke="rgba(0,255,255,0.18)" stroke-width="6" />
+  <rect x="220" y="260" width="220" height="380" rx="30" ry="30" fill="#00f5ff" opacity="0.14" />
+  <rect x="520" y="260" width="160" height="380" rx="30" ry="30" fill="#00f5ff" opacity="0.18" />
+  <rect x="820" y="260" width="220" height="380" rx="30" ry="30" fill="#0f6094" opacity="0.18" />
+  <text x="600" y="680" text-anchor="middle" font-family="Inter, sans-serif" font-size="64" fill="#00f5ff" opacity="0.95">Gym Management</text>
+</svg>
