@@ -3,59 +3,95 @@ export interface Experience {
   title: string;
   company: string;
   period: string;
+  location?: string;
   description: string;
-  type: "internship" | "project" | "achievement";
+  bullets: string[];
+  type: "internship" | "project" | "freelance";
 }
 
 export const experiences: Experience[] = [
   {
     id: 1,
-    title: "Python Developer",
-    company: "Infotact Solutions",
-    period: "2025-26",
-    description: "Developed Python automation scripts and data processing tools",
+    title: "Full Stack Development Intern",
+    company: "Tech Vedhu Pvt. Ltd.",
+    period: "Sep – Nov 2025",
+    location: "Bengaluru",
+    description:
+      "Built responsive web apps and integrated REST APIs in a collaborative engineering team environment.",
+    bullets: [
+      "Built responsive web apps with React.js, Node.js, HTML/CSS, and MySQL/MongoDB; integrated REST APIs and backend logic.",
+      "Applied version control with Git/GitHub and followed industry coding standards in a collaborative team environment.",
+    ],
     type: "internship",
   },
   {
     id: 2,
-    title: "Full Stack Development",
-    company: "Personal Projects",
-    period: "2023 - Present",
-    description: "Built 20+ full-stack web applications with React, Node.js, and MongoDB",
-    type: "project",
+    title: "Python Development Intern",
+    company: "Infotact Solutions",
+    period: "Dec 2025 – Mar 2026",
+    location: "Remote",
+    description:
+      "Developed Python applications and delivered production-ready code using OOP and data structures.",
+    bullets: [
+      "Developed Python applications using OOP, data structures, file handling, and exception handling for real-world assignments.",
+      "Delivered documented, production-ready code and improved debugging and problem-solving through structured internship projects.",
+    ],
+    type: "internship",
   },
   {
     id: 3,
-    title: "AI & Automation",
-    company: "Personal Projects",
-    period: "2024",
-    description: "Created AI chatbots, automation workflows, and ML models using Python and OpenAI",
-    type: "project",
+    title: "Freelance Developer",
+    company: "Fiverr",
+    period: "2024 – Present",
+    location: "Remote",
+    description:
+      "Delivering client projects on Fiverr — portfolio websites, full-stack web apps, and AI integrations.",
+    bullets: [
+      "Completed multiple client deliveries: portfolio websites, React apps, and backend API integrations.",
+      "Maintained 5-star ratings with on-time delivery and clean, documented codebases.",
+    ],
+    type: "freelance",
   },
   {
     id: 4,
-    title: "Hackathon Winner",
-    company: "Various Hackathons",
-    period: "2024",
-    description: "Won multiple hackathons building innovative web solutions",
-    type: "achievement",
+    title: "Full Stack Developer",
+    company: "Personal & Open Source Projects",
+    period: "2023 – Present",
+    location: "Remote",
+    description:
+      "Built 20+ full-stack and AI-powered web applications; shipped to production with real users.",
+    bullets: [
+      "Built 20+ full-stack web applications with React, Node.js, Flask, FastAPI, and MongoDB.",
+      "Developed AI chatbots, ML models, automation workflows, and real-time WebSocket applications.",
+    ],
+    type: "project",
   },
 ];
 
 export const education = [
   {
-    year: "2021",
+    year: "2020–2021",
     level: "10th Grade",
-    school: "School",
+    school: "Government Boys Higher Secondary School, Bargur",
+    stream: "Computer Science",
   },
   {
-    year: "2023",
+    year: "2022–2023",
     level: "12th Grade",
-    school: "School",
+    school: "Government Boys Higher Secondary School, Bargur",
+    stream: "Computer Science",
   },
   {
-    year: "2023-2027",
+    year: "Aug 2023 – Aug 2027",
     level: "B.E Computer Science",
-    school: "P.S.V College of Engineering & Technology",
+    school: "PSV College of Engineering & Technology (Anna University)",
+    cgpa: "7.77",
+    coursework: [
+      "Data Structures",
+      "Machine Learning",
+      "DBMS",
+      "Web Technologies",
+      "Software Engineering",
+    ],
   },
 ];

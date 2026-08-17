@@ -78,20 +78,25 @@ export default function Projects() {
           transition={{ delay: 0.4, duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {["Web Scrapper", "AI Chatbot", "Realtime Chat", "Gym System"].map(
-            (label, i) => (
+          {[
+            "AssetFlow",
+            "Nemo — AI Chatbot",
+            "Pingback — Real-Time Chat",
+            "IPL Win Predictor",
+            "Web Scraper EXTRACT/01",
+            "Gym Management System",
+          ].map((label, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-2 text-xs font-semibold text-zinc-400"
+            >
               <span
-                key={i}
-                className="flex items-center gap-2 text-xs font-semibold text-zinc-400"
-              >
-                <span
-                  className="w-2 h-2 rounded-full"
-                  style={{ background: CARD_ACCENTS[i] }}
-                />
-                {label}
-              </span>
-            )
-          )}
+                className="w-2 h-2 rounded-full"
+                style={{ background: CARD_ACCENTS[i] }}
+              />
+              {label}
+            </span>
+          ))}
         </motion.div>
       </div>
 

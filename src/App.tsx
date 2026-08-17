@@ -6,6 +6,7 @@ import Skills from "./components/skills/Skills";
 import Projects from "./components/projects/Projects";
 import Experience from "./components/experience/Experience";
 import Certificates from "./components/certificates/Certificates";
+import Achievements from "./components/achievements/Achievements";
 import Services from "./components/services/Services";
 import Contact from "./components/contact/Contact";
 import PortfolioAgent from "./components/assistant/PortfolioAgent";
@@ -24,6 +25,7 @@ function App() {
         <AnimatedSection><Skills /></AnimatedSection>
         <AnimatedSection><Projects /></AnimatedSection>
         <AnimatedSection><Experience /></AnimatedSection>
+        <AnimatedSection><Achievements /></AnimatedSection>
         <AnimatedSection><Certificates /></AnimatedSection>
         <AnimatedSection><Services /></AnimatedSection>
         <AnimatedSection><Contact /></AnimatedSection>

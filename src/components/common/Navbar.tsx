@@ -6,6 +6,7 @@ const navLinks = [
   { label: "Skills", href: "#skills" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Achievements", href: "#achievements" },
   { label: "Certificates", href: "#certificates" },
   { label: "Contact", href: "#contact" },
 ];
@@ -14,19 +15,19 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-black/40 border-b border-white/10">
-      <nav className="max-w-7xl mx-auto h-20 flex items-center justify-between px-8">
-        <a href="#" className="font-bold text-2xl text-cyan-400 hover:text-cyan-300 transition">
-          SANJEEVAN M
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-cyan-300/10 bg-[#05090f]/85 backdrop-blur-xl">
+      <nav className="max-w-7xl mx-auto h-20 flex items-center justify-between px-6 md:px-8">
+        <a href="#" className="font-mono font-bold text-base text-cyan-300 hover:text-emerald-300 transition">
+          &lt;sanjeevan.dev /&gt;
         </a>
 
         {/* Desktop Menu */}
-        <div className="hidden md:flex gap-8">
+        <div className="hidden md:flex gap-5 lg:gap-7">
           {navLinks.map((link) => (
             <a
               key={link.label}
               href={link.href}
-              className="text-sm hover:text-cyan-400 transition duration-300"
+              className="font-mono text-xs text-zinc-300 hover:text-emerald-300 transition duration-300"
             >
               {link.label}
             </a>

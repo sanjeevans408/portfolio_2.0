@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Download, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Download, ExternalLink, FileText, Terminal } from "lucide-react";
 import { profile } from "../../data/profile";
 import Aurora from "../common/Aurora";
 import FishScene from "./FishScene";
@@ -27,7 +27,7 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative w-full min-h-screen overflow-hidden bg-black pt-20">
+    <section id="hero" className="relative w-full min-h-screen overflow-hidden bg-[#05090f] pt-20">
 
       {/* ── Three.js Fish Canvas Background ── */}
       <div className="absolute inset-0 z-0">
@@ -41,27 +41,33 @@ export default function Hero() {
         <Aurora />
       </div>
 
+      <div className="code-grid absolute inset-0 z-[2] opacity-25" aria-hidden="true" />
+
       {/* ── Hero Content ── */}
       <div className="relative z-10 h-full flex items-center justify-center">
         <motion.div
-          className="text-center max-w-4xl px-6"
+          className="text-center max-w-4xl px-6 py-16"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
+          <motion.div variants={itemVariants} className="mx-auto mb-6 flex w-fit items-center gap-2 rounded-full border border-emerald-300/30 bg-emerald-300/5 px-4 py-2 font-mono text-xs text-emerald-300">
+            <Terminal size={15} /> <span>developer@portfolio:~$ whoami</span><span className="terminal-caret" />
+          </motion.div>
+
           {/* Profile Image */}
           <motion.div variants={itemVariants}>
             <img
               src={profile.profileImage}
               alt={profile.name}
-              className="w-40 h-40 mx-auto rounded-full border-4 border-cyan-400 object-cover shadow-[0_0_40px_#00F5FF] mb-8"
+              className="w-32 h-32 md:w-36 md:h-36 mx-auto rounded-2xl border border-cyan-300 object-cover shadow-[0_0_40px_rgba(34,211,238,0.45)] mb-8"
             />
           </motion.div>
 
           {/* Name */}
           <motion.h1
             variants={itemVariants}
-            className="text-7xl md:text-8xl font-black tracking-tighter mb-4"
+            className="text-5xl md:text-8xl font-black tracking-tighter mb-4 text-white"
           >
             {profile.name}
           </motion.h1>
@@ -72,9 +78,9 @@ export default function Hero() {
               {profile.roles.map((role, i) => (
                 <span
                   key={i}
-                  className="text-cyan-400 px-4 py-2 rounded-full border border-cyan-400/50"
+                  className="font-mono text-sm md:text-base text-cyan-300 px-3 py-2 rounded-md border border-cyan-400/30 bg-cyan-400/5"
                 >
-                  {role}
+                  {`{ ${role} }`}
                 </span>
               ))}
             </div>
@@ -95,16 +101,26 @@ export default function Hero() {
           >
             <a
               href="#projects"
-              className="px-8 py-4 rounded-lg bg-cyan-400 text-black font-bold hover:scale-105 hover:shadow-[0_0_20px_#00F5FF] transition duration-300"
+              className="px-7 py-4 rounded-md bg-cyan-300 text-slate-950 font-mono font-bold hover:scale-105 hover:shadow-[0_0_20px_rgba(103,232,249,0.6)] transition duration-300"
             >
               View Projects
             </a>
             <a
               href={profile.resume}
-              className="px-8 py-4 rounded-lg border-2 border-cyan-400 text-cyan-400 font-bold hover:bg-cyan-400 hover:text-black transition duration-300 flex items-center gap-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-7 py-4 rounded-md border border-white/30 text-white font-mono font-bold hover:border-cyan-400 hover:text-cyan-300 transition duration-300 flex items-center gap-2"
+            >
+              <FileText size={18} />
+              View Resume
+            </a>
+            <a
+              href={profile.resume}
+              download="Sanjeevan_Resume_ATS.pdf"
+              className="px-7 py-4 rounded-md border border-cyan-400 text-cyan-300 font-mono font-bold hover:bg-cyan-300 hover:text-slate-950 transition duration-300 flex items-center gap-2"
             >
               <Download size={18} />
-              Resume
+              Download Resume
             </a>
           </motion.div>
 

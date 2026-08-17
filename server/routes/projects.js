@@ -1,13 +1,20 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const Project = require("../models/Project");
+const sampleProjects = require("../sample-projects");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+  if (mongoose.connection.readyState !== 1) {
+    return res.json(sampleProjects);
+  }
+
   try {
     const projects = await Project.find().sort({ id: 1 });
-    res.json(projects);
+    res.json(projects.length ? projects : sampleProjects);
   } catch (error) {
-    res.status(500).json({ error: "Failed to load projects." });
+    console.warn(`Projects database is unavailable; using bundled projects: ${error.message}`);
+    res.json(sampleProjects);
   }
 });
 

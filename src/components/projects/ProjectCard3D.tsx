@@ -27,7 +27,14 @@ import * as THREE                     from "three";
 import type { Project }               from "../../data/projects";
 
 /* ── accent-colour palette – one per card ───────────────────── */
-export const CARD_ACCENTS = ["#00f5ff", "#8b5cf6", "#10b981", "#f59e0b"] as const;
+export const CARD_ACCENTS = [
+  "#00f5ff", // AssetFlow         — cyan
+  "#8b5cf6", // Nemo AI Chatbot   — violet
+  "#10b981", // Pingback Chat     — emerald
+  "#f59e0b", // IPL Predictor     — amber
+  "#ef4444", // Web Scraper       — red/coral
+  "#84cc16", // Gym System        — lime
+] as const;
 
 /* ═══════════════════════════════════════════════════════════════ */
 

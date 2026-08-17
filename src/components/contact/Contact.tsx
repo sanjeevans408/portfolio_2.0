@@ -20,13 +20,15 @@ export default function Contact() {
     });
   };
 
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error" | "fallback">("idle");
   const [statusMessage, setStatusMessage] = useState("");
+  const [fallbackEmailHref, setFallbackEmailHref] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setStatus("sending");
     setStatusMessage("");
+    setFallbackEmailHref("");
 
     try {
       const response = await fetch(apiUrl("/api/contact"), {
@@ -35,9 +37,22 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
+      const body = await response.text();
+      const data = body ? JSON.parse(body) : null;
+
+      if (response.status === 503 && data?.fallback === "email") {
+        const subject = encodeURIComponent(`Portfolio message from ${formData.name}`);
+        const message = encodeURIComponent(
+          `Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`
+        );
+        setStatus("fallback");
+        setStatusMessage("The contact service is temporarily offline. Send your prepared message by email instead.");
+        setFallbackEmailHref(`mailto:${profile.email}?subject=${subject}&body=${message}`);
+        return;
+      }
+
       if (!response.ok) {
-        const body = await response.text();
-        const errorData = body ? JSON.parse(body) : null;
+        const errorData = data;
         throw new Error(errorData?.error || "Failed to send message.");
       }
 
@@ -192,12 +207,20 @@ export default function Contact() {
               {statusMessage && (
                 <p
                   className={`text-sm ${
-                    status === "error" ? "text-red-400" : "text-emerald-400"
+                    status === "error" ? "text-red-400" : status === "fallback" ? "text-amber-300" : "text-emerald-400"
                   }`}
                   role="status"
                 >
                   {statusMessage}
                 </p>
+              )}
+              {fallbackEmailHref && (
+                <a
+                  href={fallbackEmailHref}
+                  className="block w-full rounded-lg border border-amber-300/60 px-6 py-3 text-center text-sm font-semibold text-amber-200 transition hover:bg-amber-300 hover:text-black"
+                >
+                  Send by email
+                </a>
               )}
             </form>
           </motion.div>

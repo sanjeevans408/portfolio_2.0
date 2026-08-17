@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Bot, Loader2, MessageSquarePlus, Send, Sparkles, X } from "lucide-react";
+import { Bot, Loader2, MessageSquarePlus, Send, Sparkles, WifiOff, X } from "lucide-react";
 import { apiUrl } from "../../lib/api";
 
 type ChatMessage = {
@@ -13,10 +13,27 @@ const starterPrompts = [
   "How can I contact him?",
 ];
 
+function getOfflineReply(question: string) {
+  const query = question.toLowerCase();
+
+  if (query.includes("skill") || query.includes("technology")) {
+    return "I’m offline, but Sanjeevan’s key skills include React, TypeScript, Node.js, Python, MongoDB, SQL, and AI/ML automation.";
+  }
+  if (query.includes("project")) {
+    return "I’m offline, so I can’t look up extra details. You can still browse the Projects section for Sanjeevan’s highlighted work.";
+  }
+  if (query.includes("contact") || query.includes("email") || query.includes("reach")) {
+    return "I’m offline, but the Contact section is available on this page and contains the best ways to reach Sanjeevan.";
+  }
+
+  return "I’m currently offline, so I can’t reach the portfolio assistant. Please check your connection and try again, or browse the portfolio sections directly.";
+}
+
 export default function PortfolioAgent() {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isOnline, setIsOnline] = useState(() => navigator.onLine);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: "assistant",
@@ -32,6 +49,18 @@ export default function PortfolioAgent() {
     endRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isOpen]);
 
+  useEffect(() => {
+    const goOnline = () => setIsOnline(true);
+    const goOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", goOnline);
+    window.addEventListener("offline", goOffline);
+    return () => {
+      window.removeEventListener("online", goOnline);
+      window.removeEventListener("offline", goOffline);
+    };
+  }, []);
+
   async function sendMessage(text: string) {
     const trimmed = text.trim();
     if (!trimmed || isLoading) {
@@ -45,6 +74,15 @@ export default function PortfolioAgent() {
 
     setMessages(nextMessages);
     setInput("");
+
+    if (!isOnline) {
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: getOfflineReply(trimmed) },
+      ]);
+      return;
+    }
+
     setIsLoading(true);
 
     try {
@@ -61,7 +99,12 @@ export default function PortfolioAgent() {
 
       if (!response.ok) {
         if (response.status === 502 || response.status === 503) {
-          throw new Error("The portfolio server is not running. Start it with npm run dev:server.");
+          setIsOnline(false);
+          setMessages((current) => [
+            ...current,
+            { role: "assistant", content: getOfflineReply(trimmed) },
+          ]);
+          return;
         }
         throw new Error(data?.error || "The assistant could not respond.");
       }
@@ -74,6 +117,14 @@ export default function PortfolioAgent() {
         },
       ]);
     } catch (error) {
+      if (error instanceof TypeError || !navigator.onLine) {
+        setIsOnline(false);
+        setMessages((current) => [
+          ...current,
+          { role: "assistant", content: getOfflineReply(trimmed) },
+        ]);
+        return;
+      }
       setMessages((current) => [
         ...current,
         {
@@ -108,8 +159,10 @@ export default function PortfolioAgent() {
                 <Bot size={18} />
               </div>
               <div>
-                <p className="font-semibold text-white">Portfolio Agent</p>
-                <p className="text-xs text-zinc-400">Powered by NVIDIA NIM</p>
+                <p className="font-semibold text-white">Sanjeev Agent</p>
+                <p className={`text-xs ${isOnline ? "text-zinc-400" : "text-amber-300"}`}>
+                  {isOnline ? "Powered by NVIDIA NIM" : "Offline mode — limited answers"}
+                </p>
               </div>
             </div>
             <button
@@ -120,6 +173,13 @@ export default function PortfolioAgent() {
               <X size={18} />
             </button>
           </div>
+
+          {!isOnline && (
+            <div className="flex items-center gap-2 border-b border-amber-400/20 bg-amber-400/10 px-4 py-2 text-xs text-amber-100">
+              <WifiOff size={14} />
+              Network unavailable. The agent can still provide limited portfolio guidance.
+            </div>
+          )}
 
           <div className="max-h-[60vh] space-y-4 overflow-y-auto px-4 py-4">
             {!hasMessages && (
