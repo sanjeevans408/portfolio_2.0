@@ -57,6 +57,7 @@ export default function ProjectCard3D({
   const glowMatRef   = useRef<THREE.MeshPhysicalMaterial>(null);
   const torusRef     = useRef<THREE.Mesh>(null);
   const [hovered, setHovered] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
 
   /* ── target / current Z offset for "lean-forward" on hover ── */
   const targetZ  = useRef(0);
@@ -217,6 +218,45 @@ export default function ProjectCard3D({
               backgroundRepeat: "repeat",
             }}
           >
+            {imageFailed ? (
+              <div
+                style={{
+                  height: "82px",
+                  marginBottom: "12px",
+                  borderRadius: "7px",
+                  border: `1px solid ${accentColor}40`,
+                  background: `linear-gradient(135deg, ${accentColor}22, rgba(6, 14, 28, 0.9))`,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  color: accentColor,
+                  fontSize: "10px",
+                  fontWeight: 700,
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                }}
+              >
+                {project.category} project
+              </div>
+            ) : (
+              <img
+                src={project.image}
+                alt={`${project.title} preview`}
+                style={{
+                  display: "block",
+                  width: "100%",
+                  height: "82px",
+                  marginBottom: "12px",
+                  borderRadius: "7px",
+                  border: `1px solid ${accentColor}40`,
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  background: "#020617",
+                }}
+                onError={() => setImageFailed(true)}
+              />
+            )}
+
             {/* Card index badge */}
             <div
               style={{

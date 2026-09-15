@@ -40,7 +40,7 @@ export const profile = {
 
   resume: "/documents/Sanjeevan_Resume_ATS.pdf",
 
-  profileImage: "/images/profile.jpg",
+  profileImage: "/images/profile.jpeg",
 
   stats: {
     projects: "20+",
